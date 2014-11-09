@@ -22,34 +22,24 @@ public class Maze
 			return;
 		}
 		Random rand = new Random();
-		int randomX = rand.nextInt((getWidth()-1 - 0) + 1) + 0;
-		int randomY = rand.nextInt((getHeight()-1 -0) + 1) + 0;
+		int randomX = rand.nextInt((getHeight()-1 - 0) + 1) + 0;
+		int randomY = rand.nextInt((getWidth()-1 -0) + 1) + 0;
 		
 		for (int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
-				/*if (j == randomX){
-					board[i][j][1]=1;
-				}
-				if (i == randomY){
-					board[i][j][2]=1;
-				}
-				if (j == randomX + 1){
-					board[i][j][0]=1;
-				}
-				if (i == randomY+1){
-					board[i][j][3]=1;
-				}
-				*/
 				//set outside walls
-				//x= i, y = j
 				if (j == 0)board[i][j][3]=1;
 				if (i == 0)board[i][j][0]=1;
 				if(i == getHeight()-1)board[i][j][1]=1;
 				if(j == getWidth()-1)board[i][j][2]=1;
-				
+				//set north, south, east, west walls
+				if(i == randomX)board[i][j][1]=1;
+				if(j == randomY)board[i][j][2]=1;
+				if(i == randomX + 1)board[i][j][0]=1;
+				if(j == randomY + 1)board[i][j][3]=1;
 			}
 		}
-		// TO DO: Constructor
+		
 	}
 
 	/**
