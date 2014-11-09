@@ -18,13 +18,6 @@ public class Maze
 		width = aWidth;
 		height = aHeight;
 		board = new int[height][width][4];
-		if (getWidth()==1 || getHeight()==1){
-			return;
-		}
-		Random rand = new Random();
-		int randomX = rand.nextInt((getHeight()-1 - 0) + 1) + 0;
-		int randomY = rand.nextInt((getWidth()-1 -0) + 1) + 0;
-		
 		for (int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
 				//set outside walls
@@ -32,6 +25,24 @@ public class Maze
 				if (i == 0)board[i][j][0]=1;
 				if(i == getHeight()-1)board[i][j][1]=1;
 				if(j == getWidth()-1)board[i][j][2]=1;
+			}
+		}
+		MazeRecursion(0,0,width,height);
+	}
+	
+	public void MazeRecursion(int xCoor, int yCoor, int width, int height) 
+	{
+		if (getWidth()==1 || getHeight()==1){
+			return;
+		}
+		Random rand = new Random();
+		int randomX = rand.nextInt((getHeight()-1 - 0) + 1) + 0;
+		System.out.println("randomX"+randomX);
+		int randomY = rand.nextInt((getWidth()-1 -0) + 1) + 0;
+		System.out.println("randomY"+randomY);
+		
+		for (int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
 				//set north, south, east, west walls
 				if(i == randomX)board[i][j][1]=1;
 				if(j == randomY)board[i][j][2]=1;
@@ -39,7 +50,6 @@ public class Maze
 				if(j == randomY + 1)board[i][j][3]=1;
 			}
 		}
-		//rand.nextInt((max - min) + 1) + min
 			//randomly picks 3 random walls by getting rid of one that will stay
 			int randomExcludedWall = rand.nextInt((3 - 0) + 1) + 0;
 			System.out.println("randomExcludedWall" + randomExcludedWall);
@@ -78,6 +88,15 @@ public class Maze
 					}
 				}
 			}
+			//upper left partition
+			//MazeRecursion(randomX,1);
+			//upper right partition
+			//MazeRecursion(1,1);
+			//bottom left partition
+			//MazeRecursion(1,1);
+			//bottom right partition
+			//MazeRecursion(1,1);
+		
 	}
 
 	/**
