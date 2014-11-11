@@ -32,17 +32,19 @@ public class Maze
 	
 	public void MazeRecursion(int xCoor, int yCoor, int width, int height) 
 	{
-		if (getWidth()==1 || getHeight()==1){
+		if (width==1 || height==1){
 			return;
 		}
+		System.out.println("width"+width);
+		System.out.println("height "+height);
 		Random rand = new Random();
-		int randomX = rand.nextInt((getHeight()-1 - 0) + 1) + 0;
+		int randomX = rand.nextInt((height-1 - 0) + 1) + 0;
 		System.out.println("randomX"+randomX);
-		int randomY = rand.nextInt((getWidth()-1 -0) + 1) + 0;
+		int randomY = rand.nextInt((width -1 - 0) + 1) + 0;
 		System.out.println("randomY"+randomY);
 		
-		for (int i = 0; i < height; i++){
-			for(int j = 0; j < width; j++){
+		for (int i = xCoor; i < xCoor + height; i++){
+			for(int j = yCoor; j < yCoor + width; j++){
 				//set north, south, east, west walls
 				if(i == randomX)board[i][j][1]=1;
 				if(j == randomY)board[i][j][2]=1;
@@ -62,7 +64,9 @@ public class Maze
 					{
 						int randomLocation = rand.nextInt((randomX-0)+1)+0;
 						board[randomLocation][randomY][2]=0;
+						//if (randomY+1 < width){
 						board[randomLocation][randomY+1][3]=0;
+						//}
 					}
 					//south wall
 					if(s==1)
@@ -71,11 +75,12 @@ public class Maze
 						board[randomLocation][randomY][2]=0;
 						board[randomLocation][randomY+1][3]=0;
 						
+						
 					}
 					//east wall
 					if(s==2)
 					{
-						int randomLocation = rand.nextInt((width-1)-(randomY+1)+1)+randomY+1;
+						int randomLocation = rand.nextInt(((width-1)-(randomY+1))+1)+randomY+1;
 						board[randomX][randomLocation][1]=0;
 						board[randomX+1][randomLocation][0]=0;
 					}
@@ -89,13 +94,13 @@ public class Maze
 				}
 			}
 			//upper left partition
-			//MazeRecursion(randomX,1);
+			MazeRecursion(xCoor,yCoor,randomX+1,randomY+1);
 			//upper right partition
-			//MazeRecursion(1,1);
+			//MazeRecursion(x,y,1,1);
 			//bottom left partition
-			//MazeRecursion(1,1);
+			//MazeRecursion(x,y,1,1);
 			//bottom right partition
-			//MazeRecursion(1,1);
+			//MazeRecursion(x,y,1,1);
 		
 	}
 
