@@ -38,18 +38,16 @@ public class Maze
 		if (width==1 || height==1){
 			return;
 		}
+		System.out.println("xCoor "+xCoor);
+		System.out.println("yCoor "+yCoor);
 		System.out.println("width" + width);
 		System.out.println("height " + height);
 		Random rand = new Random();
-		int randomX = rand.nextInt(((xCoor+height-1) - xCoor) + 1) + 0;
-		while (randomX == xCoor + height -1){
-			randomX = rand.nextInt(((xCoor+height-1) - xCoor) + 1) + 0;
-		}
+		int randomX = rand.nextInt(height-1);
+		randomX += xCoor;
 		System.out.println("randomX"+randomX);
-		int randomY = rand.nextInt(((yCoor+width -1) - yCoor) + 1) + 0;
-		while (randomY == yCoor+ width - 1){
-			randomY = rand.nextInt((width-1-0)+1)+0;
-		}
+		int randomY = rand.nextInt(width-1);
+		randomY+= yCoor;
 		System.out.println("randomY"+randomY);
 		
 		for (int i = xCoor; i < xCoor + height; i++){
@@ -108,15 +106,13 @@ public class Maze
 				}
 			}
 			//upper left partition
-			MazeRecursion(xCoor,yCoor,randomY+1,randomX+1);
-			//upper right partition
-			//MazeRecursion(x,y,1,1);
-			//bottom left partition
-			//MazeRecursion(x,y,1,1);
-			//bottom right partition
-			//MazeRecursion(x,y,1,1);
-			 
-		
+			MazeRecursion(xCoor,yCoor,randomY-yCoor+1,randomX-xCoor+1);
+			//lower left partition
+			MazeRecursion(randomX+1,yCoor,randomY-yCoor+1,height-(randomX-xCoor+1));
+			//top right partition
+			MazeRecursion(xCoor,randomY+1,width-(randomY-yCoor+1),randomX-xCoor+1);
+			//lower right partition
+			MazeRecursion(randomX+1,randomY+1,width-(randomY-yCoor+1),height-(randomX-xCoor+1));
 	}
 	
 	
