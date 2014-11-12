@@ -28,8 +28,6 @@ public class Maze
 				
 			}
 		}
-		//board[9][14][3]=1;
-		//board[8][13][3]=1;
 		MazeRecursion(0,0,width,height);
 	}
 	
@@ -38,17 +36,12 @@ public class Maze
 		if (width==1 || height==1){
 			return;
 		}
-		System.out.println("xCoor "+xCoor);
-		System.out.println("yCoor "+yCoor);
-		System.out.println("width" + width);
-		System.out.println("height " + height);
+		
 		Random rand = new Random();
 		int randomX = rand.nextInt(height-1);
 		randomX += xCoor;
-		System.out.println("randomX"+randomX);
 		int randomY = rand.nextInt(width-1);
 		randomY+= yCoor;
-		System.out.println("randomY"+randomY);
 		
 		for (int i = xCoor; i < xCoor + height; i++){
 			for(int j = yCoor; j < yCoor + width; j++){
@@ -64,7 +57,6 @@ public class Maze
 		
 			//randomly picks 3 random walls by getting rid of one that will stay
 			int randomExcludedWall = rand.nextInt((3 - 0) + 1) + 0;
-			System.out.println("randomExcludedWall" + randomExcludedWall);
 			int [] checkDuplicates =  new int[]{0,1,2,3};
 			checkDuplicates[randomExcludedWall] = 4;
 			for (int s:checkDuplicates){
