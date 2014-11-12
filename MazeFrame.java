@@ -19,7 +19,7 @@ public class MazeFrame
 		
 		
 		solution.add(new Pair<Integer,Integer>(0,0));
-		Thread.sleep(1000);
+		Thread.sleep(50);
 		solveMaze(solution, mc, maze,0,0);
 		mc.repaint();
 		
@@ -60,12 +60,12 @@ public class MazeFrame
 			else
 			{
 		    		//north
-		    	 	if(!maze.isNorthWall(xCoor, yCoor))
+					if(!maze.isNorthWall(xCoor, yCoor) && solution.size() > 1 && (solution.get(solution.size()-2).fst()!=xCoor-1 || solution.get(solution.size()-2).snd()!=yCoor))
 		    	 	{
 					  System.out.println("north wall is valid");
 		    		  solution.add(new Pair<Integer,Integer>(xCoor-1,yCoor));
 		    		  mc.repaint();
-		    		  Thread.sleep(1000);
+		    		  Thread.sleep(50);
 			    	  if(solveMaze(solution,mc,maze,xCoor-1,yCoor)==true)
 			    	  {
 			    		  return true;
@@ -77,13 +77,30 @@ public class MazeFrame
 			    		Thread.sleep(1000);
 			    	  }
 		    	 	}
+		    	 	if(!maze.isNorthWall(xCoor, yCoor) && solution.size() <= 1)
+		    	 	{
+					  System.out.println("north wall is valid7");
+		    		  solution.add(new Pair<Integer,Integer>(xCoor-1,yCoor));
+		    		  mc.repaint();
+		    		  Thread.sleep(1000);
+			    	  if(solveMaze(solution,mc,maze,xCoor-1,yCoor)==true)
+			    	  {
+			    		  return true;
+			    	  }
+			    	  else
+			    	  {
+			    		solution.remove(solution.size()-1);
+			    		mc.repaint();
+			    		Thread.sleep(50);
+			    	  }
+		    	 	}
 		    	 	//east
-		    	 	if(!maze.isEastWall(xCoor, yCoor))
+		    	 	if(!maze.isEastWall(xCoor, yCoor) && solution.size() > 1 && (solution.get(solution.size()-2).fst()!=xCoor || solution.get(solution.size()-2).snd()!=yCoor+1))
 		    	 	{
 		    	 		System.out.println("east wall is valid");
 		    	 		solution.add(new Pair<Integer,Integer>(xCoor,yCoor+1));
 		    	 		mc.repaint();
-		    	 		Thread.sleep(1000);
+		    	 		Thread.sleep(50);
 		    	 		if(solveMaze(solution,mc,maze,xCoor,yCoor+1)==true)
 		    	 		{
 		    	 			return true;
@@ -92,16 +109,34 @@ public class MazeFrame
 		    	 		{
 		    	 			solution.remove(solution.size()-1);
 		    	 			mc.repaint();
-		    	 			Thread.sleep(1000);
+		    	 			Thread.sleep(50);
 		    	 		}
 		    	 	}
+		    	 	if(!maze.isEastWall(xCoor, yCoor) && solution.size() <= 1)
+		    	 	{
+		    	 		System.out.println("east wall is valid");
+		    	 		solution.add(new Pair<Integer,Integer>(xCoor,yCoor+1));
+		    	 		mc.repaint();
+		    	 		Thread.sleep(50);
+		    	 		if(solveMaze(solution,mc,maze,xCoor,yCoor+1)==true)
+		    	 		{
+		    	 			return true;
+		    	 		}
+		    	 		else 
+		    	 		{
+		    	 			solution.remove(solution.size()-1);
+		    	 			mc.repaint();
+		    	 			Thread.sleep(50);
+		    	 		}
+		    	 	}
+		    	 	
 		    	 	//south
-		    	 	if(!maze.isSouthWall(xCoor,yCoor))
+		    	 	if(!maze.isSouthWall(xCoor,yCoor) && solution.size() > 1 && (solution.get(solution.size()-2).fst()!=xCoor+1 || solution.get(solution.size()-2).snd()!=yCoor))
 		    	 	{
 		    	 		System.out.println("south wall is valid");
 		    	 		solution.add(new Pair<Integer,Integer>(xCoor+1,yCoor));
 		    	 		mc.repaint();
-		    	 		Thread.sleep(1000);
+		    	 		Thread.sleep(50);
 		    	 		if(solveMaze(solution,mc,maze,xCoor+1,yCoor)==true)
 		    	 		{
 		    	 			return true;
@@ -110,16 +145,33 @@ public class MazeFrame
 		    	 		{
 		    	 			solution.remove(solution.size()-1);
 		    	 			mc.repaint();
-		    	 			Thread.sleep(1000);
+		    	 			Thread.sleep(50);
+		    	 		}
+		    	 	}
+		    	 	if(!maze.isSouthWall(xCoor,yCoor) && solution.size() <= 1)
+		    	 	{
+		    	 		System.out.println("south wall is valid");
+		    	 		solution.add(new Pair<Integer,Integer>(xCoor+1,yCoor));
+		    	 		mc.repaint();
+		    	 		Thread.sleep(50);
+		    	 		if(solveMaze(solution,mc,maze,xCoor+1,yCoor)==true)
+		    	 		{
+		    	 			return true;
+		    	 		}
+		    	 		else 
+		    	 		{
+		    	 			solution.remove(solution.size()-1);
+		    	 			mc.repaint();
+		    	 			Thread.sleep(50);
 		    	 		}
 		    	 	}
 			    	//west
-		    	 	if(!maze.isWestWall(xCoor, yCoor))
+		    	 	if(!maze.isWestWall(xCoor, yCoor) && solution.size() > 1 && (solution.get(solution.size()-2).fst()!=xCoor || solution.get(solution.size()-2).snd()!=yCoor-1))
 		    	 	{
 		    	 		System.out.println("west wall is valid");
 		    	 		solution.add(new Pair<Integer,Integer>(xCoor,yCoor-1));
 		    	 		mc.repaint();
-		    	 		Thread.sleep(1000);
+		    	 		Thread.sleep(50);
 		    	 		if(solveMaze(solution,mc,maze,xCoor,yCoor-1)==true)
 		    	 		{
 		    	 			return true;
@@ -128,41 +180,31 @@ public class MazeFrame
 		    	 		{
 		    	 			solution.remove(solution.size()-1);
 		    	 			mc.repaint();
-		    	 			Thread.sleep(1000);
+		    	 			Thread.sleep(50);
 		    	 		}
 		    	 	}
-		    	 	
-			    }
-				return false;
+		    	 	if(!maze.isWestWall(xCoor, yCoor) && solution.size() <= 1)
+		    	 	{
+		    	 		System.out.println("west wall is valid");
+		    	 		solution.add(new Pair<Integer,Integer>(xCoor,yCoor-1));
+		    	 		mc.repaint();
+		    	 		Thread.sleep(50);
+		    	 		if(solveMaze(solution,mc,maze,xCoor,yCoor-1)==true)
+		    	 		{
+		    	 			return true;
+		    	 		}
+		    	 		else
+		    	 		{
+		    	 			solution.remove(solution.size()-1);
+		    	 			mc.repaint();
+		    	 			Thread.sleep(50);
+		    	 		}
+		    	 	}
+		    	 	return false;
+		    	 }
+				
 		}
 			
-	/*
-	public static boolean valid (ArrayList<Pair<Integer,Integer>> solution, MazeComponent mc, Maze maze, int xCoor, int yCoor) 
-	{
-		//if (xCoor == 0 && yCoor == 0){
-		//	return true;
-		//}
-
-	    //Did I already look at this point?
-		
-		for (int i = 0; i < solution.size();i++ ){
-	    	  if(solution.get(i).fst()==xCoor && solution.get(i).snd()==yCoor && (xCoor!=0 && yCoor!=0)){
-	    		  System.out.println("It's false!");
-	    		  return false;
-	    		  //break;
-	    	}
-	      }
-	      
-	      // check if cell is in the bounds of the maze
-	      if (xCoor < 0 || xCoor >= maze.getHeight() || yCoor < 0 || yCoor >= maze.getWidth()){
-				System.out.println("check bounds");
-				return false;
-	      }
-	      
-
-	         //  check if cell is not blocked and not previously tried
-	     return true;
-	}
-	*/
+	
 }
 
